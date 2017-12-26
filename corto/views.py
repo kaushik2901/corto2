@@ -353,56 +353,63 @@ def analyse(request, url_id):
     else:
         return redirect("../")
     devices_filter = Click.objects.filter(urlId=url)
-    pc = devices_filter.filter(device="pc")
-    tablet = devices_filter.filter(device="tablet")
-    mobile = devices_filter.filter(device="mobile")
-    other = devices_filter.filter(device="other")
+    pc = devices_filter.filter(device="pc").count()
+    tablet = devices_filter.filter(device="tablet").count()
+    mobile = devices_filter.filter(device="mobile").count()
+    other = devices_filter.filter(device="other").count()
 
-    android = devices_filter.filter(platform__icontains="android")
-    linux = devices_filter.filter(platform__icontains="linux")
-    windows = devices_filter.filter(platform__icontains="windows")
-    ios = devices_filter.filter(platform__icontains="ios")
-    mac = devices_filter.filter(platform__icontains="mac")
-    other = devices_filter.filter(platform__icontains="other")
+    devices = {
+        "pc":pc,
+        "mobile":mobile,
+        "tablet":tablet,
+        "other":other
+    }
 
-    chrome = devices_filter.filter(browser__icontains="chrome")
-    safari = devices_filter.filter(browser__icontains="safari")
-    opera = devices_filter.filter(browser__icontains="opera")
-    uc = devices_filter.filter(browser__icontains="uc")
-    samsung = devices_filter.filter(browser__icontains="samsung")
-    android = devices_filter.filter(browser__icontains="android")
-    bot = devices_filter.filter(browser__icontains="bot")
-    other = devices_filter.filter(browser__icontains="other")
+    android = Click.objects.filter(urlId=url, platform__icontains="android").count()
+    linux = Click.objects.filter(urlId=url, platform__icontains="linux").count()
+    windows = Click.objects.filter(urlId=url, platform__icontains="windows").count()
+    ios = Click.objects.filter(urlId=url, platform__icontains="ios").count()
+    mac = Click.objects.filter(urlId=url, platform__icontains="mac").count()
+    other = Click.objects.filter(urlId=url, platform__icontains="other").count()
+
+    platforms = {
+        "android": android,
+        "linux":linux,
+        "windows":windows,
+        "ios":ios,
+        "mac":mac,
+        "other":other
+    }
+
+    chrome = Click.objects.filter(urlId=url, browser__icontains="Chrome").count()
+    safari = Click.objects.filter(urlId=url, browser__icontains="Safari").count()
+    opera = Click.objects.filter(urlId=url, browser__icontains="Opera").count()
+    uc = Click.objects.filter(urlId=url, browser__icontains="UC").count()
+    samsung = Click.objects.filter(urlId=url, browser__icontains="Samsung").count()
+    android = Click.objects.filter(urlId=url, browser__icontains="Android").count()
+    bot = Click.objects.filter(urlId=url, browser__icontains="bot").count()
+    other = Click.objects.filter(urlId=url, browser__icontains="Other").count()
+
+    browsers = {
+        "chrome": chrome,
+        "safari": safari,
+        "opera": opera,
+        "uc": uc,
+        "samsung": samsung,
+        "android": android,
+        "bot": bot,
+        "other": other
+    }
 
     con = {
         "id":url_id,
         "url":url,
         "details": dash_data(db_token),
-        "devices": {
-            "pc":str(len(pc)),
-            "mobile":str(len(mobile)),
-            "tablet":str(len(tablet)),
-            "other":str(len(other))
-        },
-        "platforms": {
-            "android":str(len(android)),
-            "linux":str(len(linux)),
-            "windows":str(len(windows)),
-            "ios":str(len(ios)),
-            "mac":str(len(mac)),
-            "other":str(len(other))
-        },
-        "browser": {
-            "chrome": str(len(chrome)),
-            "safari": str(len(safari)),
-            "opera": str(len(opera)),
-            "uc": str(len(uc)),
-            "samsung": str(len(samsung)),
-            "android": str(len(android)),
-            "bot": str(len(bot)),
-            "other": str(len(other))
-        }
+        "devices": devices,
+        "platforms": platforms,
+        "browser": browsers
     }
+    # return HttpResponse(con.browser.android)
     return render(request, "corto/analyse.html", con)
 
 def analyse_red(request):
