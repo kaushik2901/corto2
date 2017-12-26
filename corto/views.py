@@ -10,7 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 username = ""
 email = ""
 urls = {}
-site = "http://localhost/"
+site = "http://cortos.herokuapp.com/"
 
 #generates random string
 def id(size=6, chars=string.ascii_lowercase + string.ascii_uppercase + string.digits):
