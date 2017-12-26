@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+      crossorigin="anonymous" / >
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link
+      rel="shortcut icon"
+      href="icon.ico" />
+    <title>Corto - URL Shortener</title>
+    <style>
+    li {
+      display: inline-block;
+    }
+    tr > td {
+      max-width: 150px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+    <script type="text/javascript">
+
+
+    var err = "{{error}}";
+    var msg = "{{ title }}";
+
+
+      window.onload = function() {
+
+        var clipboard = new Clipboard('#copy-btn');
+        clipboard.on('success', function(e) {
+            console.log(e);
+            document.getElementById('copy_done').style.display = "block";
+            setInterval(function() {
+                document.getElementById('copy_done').style.display = "none";
+            }, 5000);
+        });
+        clipboard.on('error', function(e) {
+            console.log(e);
+        });
+
+        if(err != "") {
+          document.getElementById('error_msg').innerHTML = err;
+          $('#erorr_model').modal('show');
+        }
+        if(msg != "") {
+          document.getElementById('message_title').innerHTML = msg;
+
+          $('#message').modal('show');
+        }
+
+      }
+
+      function forgot() {
+        $('#sign_in_model').modal('hide');
+        $('#forgotpass').modal('show');
+      }
+      function not_ac() {
+        $('#sign_in_model').modal('hide');
+        $('#sign_up_model').modal('show');
+      }
+      function ac() {
+        $('#sign_in_model').modal('show');
+        $('#sign_up_model').modal('hide');
+      }
+
+      function copyurl() {
+        try {
+
+        } catch (e) {
+          console.log(e);
+        } finally {
+
+        }
+      }
+
+      function red() {
+        window.location = "http://cortos.herokuapp.com/";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="modal fade" id="sign_in_model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
+            <button type="button" class="close" data-dismiss="modal" onclick="red();" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="" action="/sign_in/" method="POST">
+              {% csrf_token %}
+              <div class="container">
+                <div class="row">
+                  <div class="form-group col-sm">
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm">
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm">
+                    <input class="btn btn-primary btn-block" type="submit" name="login" value="LOGIN" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" onclick="forgot();">Forgot password?</button>
+              <button type="button" class="btn btn-primary" onclick="not_ac();">Not Account?</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="sign_up_model" tabindex="-1" role="dialog" aria-labelledby="sign_up_model" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="sign_up_model">SIGN UP</h5>
+            <button type="button" class="close" data-dismiss="modal" onclick="red();" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="" action="/sign_up/" method="POST">
+              {% csrf_token %}
+              <div class="container">
+                <div class="row">
+                  <div class="form-group col-sm">
+                    <input type="text" class="form-control" id="fname" placeholder="First Name" name="fname">
+                  </div>
+                  <div class="form-group col-sm">
+                    <input type="text" class="form-control" id="lname" placeholder="Last Name" name="lname">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm">
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm">
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm">
+                    <input type="password" class="form-control" id="repassword" placeholder="Repeat Password" name="repassword">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm">
+                    <input class="btn btn-primary btn-block" type="submit" name="SIGNUP" value="SIGNUP" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="ac();">Already registered?</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="forgotpass" tabindex="-1" role="dialog" aria-labelledby="forgotpass" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="forgotpass">Forgot Password?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="" action="/sign_in/" method="post">
+              {% csrf_token %}
+              <div class="container">
+                <div class="row">
+                  <div class="form-group col-sm">
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm">
+                    <input class="btn btn-primary btn-block" type="submit" name="login" value="Get Password" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="modal fade" id="erorr_model" tabindex="-1" role="dialog" aria-labelledby="erorr_model" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="erorr_model">ERROR</h5>
+                <button type="button" class="close" data-dismiss="modal" onclick="red();" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="error_msg">
+
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" onclick="red();" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="message_title" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="message_title"></h5>
+                <button type="button" class="close" data-dismiss="modal" onclick="red();" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id="error_msg">
+                <!-- <h6>Original URL</h6>
+                <h6><a href="{{original}}">{{original}}</a></h6>
+                <h6>Shorted URL</h6>
+                <h6><a href="{{shorted}}">{{shorted}}</a></h6> -->
+                <div class="container">
+                  <div class="row">
+                    <div class="form-group col-sm">
+                      <label for="original"><h6>Original URL <a href="{{original}}"><i class="fa fa-external-link" target="_blank" aria-hidden="true"></i></a></h6></label>
+                      <input type="text" class="form-control" id="original" value="{{original}}" readonly>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm">
+                      <label for="shortan"><h6>Shorten URL <a href="{{shorted}}"><i class="fa fa-external-link" target="_blank" aria-hidden="true"></i></a></h6></label>
+                      <input type="text" class="form-control" id="shortan" value="{{shorted}}" readonly>
+                      <span id="copy_id" style="display:none">{{shorted}}</span>
+                      <small id="copy_done" style="display:none;" class="form-text text-muted">URl copied to clipboard</small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm">
+                      <button type="button" id="copy-btn" class="btn btn-secondary" data-clipboard-target="#shortan" onclick="copyurl();">Copy</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    <nav class="navbar navbar-light navbar-expand-lg justify-content-between" >
+      <span class="navbar-brand"><span style="color:#2196F3;">CORTO</span> - URL Shortener</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbar">
+        <div class="navbar-nav">
+          <a href="#" data-toggle="modal" data-target="#sign_in_model" class="nav-item nav-link">LOGIN</a>
+          <a href="#" data-toggle="modal" data-target="#sign_up_model" class="nav-item nav-link">SIGN UP</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row" style="background-color:#2196F3;">
+        <div class="container" style="padding:20px;">
+          <h4 style="color:white;">Shorten your link here</h4><br />
+          <form action="/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" name="url" class="form-control" id="input_url" placeholder="example.com">
+            </div>
+            <button type="submit" class="btn btn-light">SHORTEN</button>
+          </form>
+        </div>
+      </div>
+      {% if is_data == 1 %}
+        <div class="row container-fluid">
+          <table class="table table-responsive-sm">
+            <thead>
+              <tr>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">Original</th>
+                <th scope="col">Shorted</th>
+                <th scope="col">Created</th>
+                <th scope="col">Clicks</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in data %}
+                <tr>
+                  <td>&nbsp;</td>
+                  <td><a href="{{ i.url_id.original }}" style="white-space:rap;overflow: hidden;text-overflow: hidden;"  id="original_url">{{ i.url_id.original }}</a></td>
+                  <td><a href="{{ i.url_id.shortan }}">{{ i.url_id.shortan }}</a></td>
+                  <td>{{ i.url_id.time.date }}</td>
+                  <td>{{ i.url_id.clicks }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+      <div class="row">
+        <div class="col-md" style="background-color:#E3F2FD;padding:30px 0px;">
+          <h1 style="text-align:center;font-size:100px;"><i class="fa fa-link" aria-hidden="true"></i></h1>
+          <h3 style="text-align:center;">Shorten</h3>
+          <p style="text-align:center;color:#424242;">Shorten your link<br /> So it'll be convenient to share world wide</p>
+        </div>
+        <div class="col-md" style="background-color:#BBDEFB;padding:30px 0px;">
+          <h1 style="text-align:center;font-size:100px;"><i class="fa fa-bar-chart" aria-hidden="true"></i></h1>
+          <h3 style="text-align:center;">Analyse</h3>
+          <p style="text-align:center;color:#424242;">Keep track<br />where your clicks are coming from</p>
+        </div>
+        <div class="col-md" style="background-color:#E3F2FD;padding:30px 0px;">
+          <h1 style="text-align:center;font-size:100px;"><i class="fa fa-tasks" aria-hidden="true"></i></h1>
+          <h3 style="text-align:center;">Manage</h3>
+          <p style="text-align:center;color:#424242;">Manage and distribute<br />your links in easy way</p>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid" style="padding:20px;">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="#">FEATURES</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">ABOUT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">PRIVACY POLICY</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">TERMS</a>
+        </li>
+        <li class="nav-item justify-content-end">
+          <span class="nav-link disabled">&copy; 2017 Corto Inc.</span>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
