@@ -27,10 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    'cortos.herokuapp.com',
-    'https://cortos.herokuapp.com/',
-    'device2901.herokuapp.com',
-    'http://device2901.herokuapp.com'
+    '*'
 ]
 
 
