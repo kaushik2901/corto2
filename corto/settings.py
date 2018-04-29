@@ -87,12 +87,12 @@ DATABASES = {
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'corto',
-#         'USER': 'kaushik',
-#         'PASSWORD': 'mypython2901',
-#         'HOST': 'db4free.net',
-#         'PORT': '3307',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dbc86jtf4hgjr6',
+#         'USER': 'ppealwrgjshnmd',
+#         'PASSWORD': 'mypython2c2dec912b6744532af288c0ecf5b2299ccc05d631c056d96ced026b2d267f352901',
+#         'HOST': 'ec2-184-72-228-128.compute-1.amazonaws.com',
+#         'PORT': '5432',
 #     }
 # }
 
