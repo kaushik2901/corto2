@@ -332,10 +332,10 @@ def forgot(request):
             mail = request.POST['email']
             
             try:
-                Ur = User.objects.get(mail=mail)
+                Ur = User.objects.get(email=mail)
             except ObjectDoesNotExist:
                 con = {
-                    "error": "Url is not valid"
+                    "error": "User not found"
                 }
                 return render(request, "corto/index.html", con)
             subject = "Forgot Password - CORTO URL SHORTNER"
