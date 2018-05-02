@@ -100,7 +100,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mail.yahoo.com'
 EMAIL_HOST_USER = 'kaushik_jadav@yahoo.com'
 EMAIL_HOST_PASSWORD = 'K@ushik2901'
-EMAIL_PORT = 465
+EMAIL_PORT = 587
 
 
 # Password validation
