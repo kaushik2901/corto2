@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^logout/', views.logout),
     url(r'^(?P<short_url>[0-9A-Za-z]+)$', views.redirecting),
     url(r'^sign_in/', views.sign_in),
-    url(r'^sign_up/', views.sign_up)
+    url(r'^sign_up/', views.sign_up),
+    url(r'^forgot/', views.forgot)
     ]
