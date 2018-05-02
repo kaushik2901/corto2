@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render, redirect,render_to_response
+from django.core.mail import send_mail
 from corto.forms import *
 from .models import *
 from django.contrib.messages import get_messages
@@ -329,6 +330,20 @@ def forgot(request):
     if request.method == 'POST':
         if 'email' in request.POST:
             mail = request.POST['email']
+            
+            try:
+                Ur = User.objects.get(mail=mail)
+            except ObjectDoesNotExist:
+                con = {
+                    "error": "Url is not valid"
+                }
+                return render(request, "corto/index.html", con)
+            subject = "Forgot Password - CORTO URL SHORTNER"
+            message = "\n\nDear " + str(Ur.fname) + " " + str(Ur.lname) + ",\nYour Login credentials for CORTO URL SHORTNER are as under :\n"
+            message += "\nEmail : " + str(Ur.email) + "\nPassword : " + str(Ur.password) + "\n\nThank you for using CORTO"
+            from = "Corto URL Shortner"
+            to = [ str(Ur.email) ]
+            send_mail(subject, message, from, to, fail_silently=True)
             return HttpResponse(mail)
     return redirect(site)
 
