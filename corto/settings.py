@@ -96,12 +96,12 @@ DATABASES = {
 #     }
 # }
 
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mail.yahoo.com'
+EMAIL_PORT = 587
 EMAIL_HOST_USER = 'kaushik_jadav@yahoo.com'
 EMAIL_HOST_PASSWORD = 'K@ushik2901'
-EMAIL_PORT = 587
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
