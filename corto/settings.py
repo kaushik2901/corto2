@@ -96,6 +96,12 @@ DATABASES = {
 #     }
 # }
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mail.yahoo.com'
+EMAIL_HOST_USER = 'kaushik_jadav@yahoo.com'
+EMAIL_HOST_PASSWORD = 'K@ushik2901'
+EMAIL_PORT = 465
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
