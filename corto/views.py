@@ -344,7 +344,7 @@ def forgot(request):
             Sender = "Corto URL Shortner"
             to = [ str(Ur.email) ]
             send_mail(subject, message, Sender, to, fail_silently=True)
-            return HttpResponse(mail)
+            return HttpResponse("Email has been sent to " + str(Ur.email))
     return redirect(site)
 
 def analyse(request, url_id):
