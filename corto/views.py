@@ -325,6 +325,13 @@ def sign_up(request):
                 return render(request, "corto/index.html", {"error":error})
     return redirect(site)
 
+def forgot(request):
+    if request.method == 'POST':
+        if 'email' in request.POST:
+            mail = request.POST['email']
+            return HttpResponse(mail)
+    return redirect(site)
+
 def analyse(request, url_id):
     con = {
         "id":url_id
