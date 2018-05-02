@@ -341,9 +341,9 @@ def forgot(request):
             subject = "Forgot Password - CORTO URL SHORTNER"
             message = "\n\nDear " + str(Ur.fname) + " " + str(Ur.lname) + ",\nYour Login credentials for CORTO URL SHORTNER are as under :\n"
             message += "\nEmail : " + str(Ur.email) + "\nPassword : " + str(Ur.password) + "\n\nThank you for using CORTO"
-            from = "Corto URL Shortner"
+            Sender = "Corto URL Shortner"
             to = [ str(Ur.email) ]
-            send_mail(subject, message, from, to, fail_silently=True)
+            send_mail(subject, message, Sender, to, fail_silently=True)
             return HttpResponse(mail)
     return redirect(site)
 
