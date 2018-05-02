@@ -343,7 +343,7 @@ def forgot(request):
             message += "\nEmail : " + str(Ur.email) + "\nPassword : " + str(Ur.password) + "\n\nThank you for using CORTO"
             Sender = "Corto URL Shortner"
             to = [ str(Ur.email) ]
-            send_mail(subject, message, Sender, to, fail_silently=True)
+            send_mail(subject, message, Sender, to, fail_silently=False)
             return HttpResponse("Email has been sent to " + str(Ur.email))
     return redirect(site)
 
