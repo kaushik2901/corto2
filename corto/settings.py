@@ -96,7 +96,7 @@ DATABASES = {
 #     }
 # }
 
-EMAIL_USE_SSL = True
+EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mail.yahoo.com'
 EMAIL_HOST_USER = 'kaushik_jadav@yahoo.com'
 EMAIL_HOST_PASSWORD = 'K@ushik2901'
