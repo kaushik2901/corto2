@@ -339,9 +339,9 @@ def forgot(request):
                 }
                 return render(request, "corto/index.html", con)
             subject = "Forgot Password - CORTO URL SHORTNER"
-            message = "\n\nDear " + str(Ur.fname) + " " + str(Ur.lname) + ",\nYour Login credentials for CORTO URL SHORTNER are as under :\n"
+            message = "\n\nDear " + str(Ur.fname) + " " + str(Ur.lname) + ",\n\nYour Login credentials for CORTO URL SHORTNER are as under :\n"
             message += "\nEmail : " + str(Ur.email) + "\nPassword : " + str(Ur.password) + "\n\nThank you for using CORTO"
-            Sender = 'kaushik_jadav@yahoo.com'
+            Sender = 'CORTO URL SHORTNER <kaushik_jadav@yahoo.com>'
             to = [ str(Ur.email) ]
             send_mail(subject, message, Sender, to, fail_silently=False)
             return HttpResponse("Email has been sent to " + str(Ur.email))
